@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
 //        user.setUid(3);
 //        AppDataBase.getDatabase().userdao().update(user);
         //one to one
-        oneToOne();
-//        oneToMore();
+//        oneToOne();
+        oneToMore();
     }
 
 

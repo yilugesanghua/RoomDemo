@@ -14,6 +14,22 @@ import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
+/**
+ *
+ * https://blog.csdn.net/Ricardo6/article/details/88385613
+ * INSERT，UPDATE，DELETE操作可以返回Completable，Single和Maybe三种对象，
+ * 而QEURY操作，如果是一次性查询，可以返回Single，Maybe，
+ * 如需要可观测对象，可以返回Observable和Flowable对象，
+ * 但是注意，不能返回Completable对象。
+ *
+ *
+ * 先来简单介绍一下这几个属于RxJava的对象的特点。
+ *
+ * Completable：只有onComplete和onError方法，即是只有“完成”和“错误”两种状态，不会返回具体的结果。
+ * Single：其回调为onSuccess和onError，查询成功会在onSuccess中返回结果，需要注意的是，如果未查询到结果，即查询结果为空，会直接走onError回调，抛出EmptyResultSetException异常。
+ * Maybe：其回调为onSuccess，onError，onComplete，查询成功，如果有数据，会先回调onSuccess再回调onComplete，如果没有数据，则会直接回调onComplete。
+ * Flowable/Observable：这俩相信不用多介绍了，这是返回一个可观察的对象，每当查询语句查询的部分有变化时，都会回调它的onNext方法，直到Rx流断开。
+ */
 @Dao
 public interface UserDao {
     //简单sql语句，查询user表所有的column
